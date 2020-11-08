@@ -15,3 +15,4 @@ class FogaoAdapter implements IProduto {
         $this->fogao->umMetodoDeFogao();
     }
 }
+?>

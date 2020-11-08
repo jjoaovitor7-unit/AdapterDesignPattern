@@ -7,3 +7,4 @@ class Fogao extends Produto {
         echo "Sou um fogão.\n";
     }
 }
+?>
