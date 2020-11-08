@@ -15,3 +15,4 @@ class LiquidificadorAdapter implements IProduto {
         $this->liquidificador->umMetodoDeLiquidificador();
     }
 }
+?>

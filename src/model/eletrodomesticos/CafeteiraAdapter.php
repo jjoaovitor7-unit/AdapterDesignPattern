@@ -15,3 +15,4 @@ class CafeteiraAdapter implements IProduto {
         $this->cafeteira->umMetodoDeCafeteira();
     }
 }
+?>

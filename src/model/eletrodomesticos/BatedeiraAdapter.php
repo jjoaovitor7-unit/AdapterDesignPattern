@@ -15,3 +15,4 @@ class BatedeiraAdapter implements IProduto {
         $this->batedeira->umMetodoDeBatedeira();
     }
 }
+?>
