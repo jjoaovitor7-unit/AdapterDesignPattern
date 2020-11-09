@@ -1,19 +1,37 @@
 <?php
 require_once(__DIR__ . "/model/IProduto.php");
-require_once(__DIR__ . "/model/eletrodomesticos/LiquidificadorAdapter.php");
-require_once(__DIR__ . "/model/eletrodomesticos/Liquidificador.php");
-require_once(__DIR__ . "/model/linhabranca/FogaoAdapter.php");
-require_once(__DIR__ . "/model/linhabranca/Fogao.php");
-require_once(__DIR__ . "/model/linhabranca/GeladeiraAdapter.php");
-require_once(__DIR__ . "/model/linhabranca/Geladeira.php");
-require_once(__DIR__ . "/model/linhabranca/ArCondicionadoAdapter.php");
-require_once(__DIR__ . "/model/linhabranca/ArCondicionado.php");
+
+// Eletrodomésticos
 require_once(__DIR__ . "/model/eletrodomesticos/BatedeiraAdapter.php");
 require_once(__DIR__ . "/model/eletrodomesticos/Batedeira.php");
+
 require_once(__DIR__ . "/model/eletrodomesticos/CafeteiraAdapter.php");
 require_once(__DIR__ . "/model/eletrodomesticos/Cafeteira.php");
+
+require_once(__DIR__ . "/model/eletrodomesticos/LiquidificadorAdapter.php");
+require_once(__DIR__ . "/model/eletrodomesticos/Liquidificador.php");
+
+require_once(__DIR__ . "/model/eletrodomesticos/SanduicheiraAdapter.php");
+require_once(__DIR__ . "/model/eletrodomesticos/Sanduicheira.php");
+
 require_once(__DIR__ . "/model/eletrodomesticos/TorradeiraAdapter.php");
 require_once(__DIR__ . "/model/eletrodomesticos/Torradeira.php");
+
+// Eletrodomésticos Linha Branca
+require_once(__DIR__ . "/model/linhabranca/ArCondicionadoAdapter.php");
+require_once(__DIR__ . "/model/linhabranca/ArCondicionado.php");
+
+require_once(__DIR__ . "/model/linhabranca/FogaoAdapter.php");
+require_once(__DIR__ . "/model/linhabranca/Fogao.php");
+
+require_once(__DIR__ . "/model/linhabranca/GeladeiraAdapter.php");
+require_once(__DIR__ . "/model/linhabranca/Geladeira.php");
+
+require_once(__DIR__ . "/model/linhabranca/LavadoraAdapter.php");
+require_once(__DIR__ . "/model/linhabranca/Lavadora.php");
+
+require_once(__DIR__ . "/model/linhabranca/MicroOndasAdapter.php");
+require_once(__DIR__ . "/model/linhabranca/MicroOndas.php");
 
 class Client {
     public function main()
@@ -29,7 +47,8 @@ class Client {
             echo "\n1-Batedeira";
             echo "\n2-Cafeteira";
             echo "\n3-Liquidificador";
-            echo "\n4-Torradeira";
+            echo "\n4-Sanduicheira";
+            echo "\n5-Torradeira";
             echo "\n:";
 
             $optionEletrodomesticos = fgets(STDIN);
@@ -53,6 +72,12 @@ class Client {
 
             else if ($optionEletrodomesticos == 4)
             {
+                $produto = new SanduicheiraAdapter(new Sanduicheira());
+                $produto->execute();
+            }
+
+            else if ($optionEletrodomesticos == 5)
+            {
                 $produto = new TorradeiraAdapter(new Torradeira());
                 $produto->execute();
             }
@@ -67,6 +92,8 @@ class Client {
             echo "\n1-ArCondicionado";
             echo "\n2-Fogão";
             echo "\n3-Geladeira";
+            echo "\n4-Lavadora";
+            echo "\n5-MicroOndas";
             echo "\n:";
 
             $optionEletrodomesticos = fgets(STDIN);
@@ -87,7 +114,19 @@ class Client {
                 $produto = new GeladeiraAdapter(new Geladeira());
                 $produto->execute();                
             }
-            
+
+            else if ($optionEletrodomesticos == 4)
+            {
+                $produto = new LavadoraAdapter(new Lavadora());
+                $produto->execute();
+            }
+
+            else if ($optionEletrodomesticos == 5)
+            {
+                $produto = new MicroOndasAdapter(new MicroOndas());
+                $produto->execute();
+            }
+
             else {
                 echo "Opção não encontrada.\n";
             }
