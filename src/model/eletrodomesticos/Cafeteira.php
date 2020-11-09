@@ -4,7 +4,7 @@ require_once(getcwd() . '/src/model/Produto.php');
 class Cafeteira extends Produto {
     public function umMetodoDeCafeteira()
     {
-        echo "Sou uma cafeteira.\n";
+        echo "Você comprou uma cafeteira.\n";
     }
 }
 ?>

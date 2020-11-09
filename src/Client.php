@@ -34,106 +34,151 @@ require_once(__DIR__ . "/model/linhabranca/MicroOndasAdapter.php");
 require_once(__DIR__ . "/model/linhabranca/MicroOndas.php");
 
 class Client {
+
+    public $carrinhoDeCompras = array();
+    public $isTrue = true;
+
     public function main()
     {
-        echo "Produtos";
-        echo "\n1-Eletrodomésticos";
-        echo "\n2-Eletrodomésticos Linha Branca";
-        echo "\n:";
-        $optionProdutos = fgets(STDIN);
-
-        if ($optionProdutos == 1) {
-            echo "\nEletrodomésticos";
-            echo "\n1-Batedeira";
-            echo "\n2-Cafeteira";
-            echo "\n3-Liquidificador";
-            echo "\n4-Sanduicheira";
-            echo "\n5-Torradeira";
+        while ($this->isTrue)
+        {
+            echo "\nProdutos";
+            echo "\n1-Eletrodomésticos";
+            echo "\n2-Eletrodomésticos Linha Branca";
             echo "\n:";
+            $optionProdutos = fgets(STDIN);
 
-            $optionEletrodomesticos = fgets(STDIN);
-            if ($optionEletrodomesticos == 1)
+            if ($optionProdutos == 1)
             {
-                $produto = new BatedeiraAdapter(new Batedeira());
-                $produto->execute();
-            }
+                echo "\nEletrodomésticos";
+                echo "\n1-Batedeira";
+                echo "\n2-Cafeteira";
+                echo "\n3-Liquidificador";
+                echo "\n4-Sanduicheira";
+                echo "\n5-Torradeira";
+                echo "\n:";
 
-            else if ($optionEletrodomesticos == 2)
+                $optionEletrodomesticos = fgets(STDIN);
+                if ($optionEletrodomesticos == 1)
+                {
+                    $produto = new BatedeiraAdapter(new Batedeira());
+                    $produto->execute();
+                    array_push($this->carrinhoDeCompras, "Batedeira");
+                }
+                
+                else if ($optionEletrodomesticos == 2)
+                {
+                    $produto = new CafeteiraAdapter(new Cafeteira());
+                    $produto->execute();
+                    array_push($this->carrinhoDeCompras, "Cafeteira");
+                }
+                
+                else if ($optionEletrodomesticos == 3)
+                {
+                    $produto = new LiquidificadorAdapter(new Liquidificador());
+                    $produto->execute();
+                    array_push($this->carrinhoDeCompras, "Liquidificador");
+                }
+                
+                else if ($optionEletrodomesticos == 4)
+                {
+                    $produto = new SanduicheiraAdapter(new Sanduicheira());
+                    $produto->execute();
+                    array_push($this->carrinhoDeCompras, "Sanduicheira");
+                }
+                
+                else if ($optionEletrodomesticos == 5)
+                {
+                    $produto = new TorradeiraAdapter(new Torradeira());
+                    $produto->execute();
+                    array_push($this->carrinhoDeCompras, "Torradeira");
+                }
+                
+                else {
+                    echo "Opção não encontrada.\n";
+                }
+
+            }
+            
+            else if ($optionProdutos == 2)
             {
-                $produto = new CafeteiraAdapter(new Cafeteira());
-                $produto->execute();
-            }
+                echo "\nEletromésticos Linha Branca";
+                echo "\n1-ArCondicionado";
+                echo "\n2-Fogão";
+                echo "\n3-Geladeira";
+                echo "\n4-Lavadora";
+                echo "\n5-MicroOndas";
+                echo "\n:";
 
-            else if ($optionEletrodomesticos == 3)
-            {
-                $produto = new LiquidificadorAdapter(new Liquidificador());
-                $produto->execute();
+                $optionEletrodomesticos = fgets(STDIN);
+                if ($optionEletrodomesticos == 1)
+                {
+                    $produto = new ArCondicionadoAdapter(new ArCondicionado());
+                    $produto->execute();
+                    array_push($this->carrinhoDeCompras, "ArCondicionado");
+                }
+                
+                else if ($optionEletrodomesticos == 2)
+                {
+                    $produto = new FogaoAdapter(new Fogao());
+                    $produto->execute();
+                    array_push($this->carrinhoDeCompras, "Fogão");
+                }
+                
+                else if ($optionEletrodomesticos == 3)
+                {
+                    $produto = new GeladeiraAdapter(new Geladeira());
+                    $produto->execute();
+                    array_push($this->carrinhoDeCompras, "Geladeira");
+                }
+                
+                else if ($optionEletrodomesticos == 4)
+                {
+                    $produto = new LavadoraAdapter(new Lavadora());
+                    $produto->execute();
+                    array_push($this->carrinhoDeCompras, "Lavadora");
+                }
+                
+                else if ($optionEletrodomesticos == 5)
+                {
+                    $produto = new MicroOndasAdapter(new MicroOndas());
+                    $produto->execute();
+                    array_push($this->carrinhoDeCompras, "MicroOndas");
+                }
+                
+                else {
+                    echo "Opção não encontrada.\n";
+                }
             }
-
-            else if ($optionEletrodomesticos == 4)
-            {
-                $produto = new SanduicheiraAdapter(new Sanduicheira());
-                $produto->execute();
-            }
-
-            else if ($optionEletrodomesticos == 5)
-            {
-                $produto = new TorradeiraAdapter(new Torradeira());
-                $produto->execute();
-            }
-
+            
             else {
                 echo "Opção não encontrada.\n";
             }
-        }
 
-        else if ($optionProdutos == 2){
-            echo "\nEletromésticos Linha Branca";
-            echo "\n1-ArCondicionado";
-            echo "\n2-Fogão";
-            echo "\n3-Geladeira";
-            echo "\n4-Lavadora";
-            echo "\n5-MicroOndas";
-            echo "\n:";
-
-            $optionEletrodomesticos = fgets(STDIN);
-            if ($optionEletrodomesticos == 1)
+            echo "\nDeseja exibir o carrinho de compras? <S/n>\n:";
+            $carrinhoDeComprasCond = fgets(STDIN);
+            if (strtok($carrinhoDeComprasCond, "\n") == "S" || strtok($carrinhoDeComprasCond, "\n") == 's')
             {
-                $produto = new ArCondicionadoAdapter(new ArCondicionado());
-                $produto->execute();
+                echo "\nCarrinho de compras:\n";
+                // print_r($this->carrinhoDeCompras);
+
+                // Iterator
+                $obj = new ArrayObject($this->carrinhoDeCompras);
+                $it = $obj->getIterator();
+
+                while ($it->valid())
+                {
+                    echo $it->current() . "\n";
+                    $it->next();
+                }
             }
 
-            else if ($optionEletrodomesticos == 2)
+            echo "\nDeseja parar o programa? <S/n>\n:";
+            $stopCond = fgets(STDIN);
+            if (strtok($stopCond, "\n") == "S" || strtok($stopCond, "\n") == "s")
             {
-                $produto = new FogaoAdapter(new Fogao());
-                $produto->execute();
+                $this->isTrue = false;
             }
-
-            else if ($optionEletrodomesticos == 3)
-            {
-                $produto = new GeladeiraAdapter(new Geladeira());
-                $produto->execute();                
-            }
-
-            else if ($optionEletrodomesticos == 4)
-            {
-                $produto = new LavadoraAdapter(new Lavadora());
-                $produto->execute();
-            }
-
-            else if ($optionEletrodomesticos == 5)
-            {
-                $produto = new MicroOndasAdapter(new MicroOndas());
-                $produto->execute();
-            }
-
-            else {
-                echo "Opção não encontrada.\n";
-            }
-        }
-        
-        else {
-            echo "Opção não encontrada.\n";
         }
     }
 }
